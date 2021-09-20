@@ -1,0 +1,105 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Django Portal{% endblock %}
+{% block content %}
+
+<div class="container">
+ 
+	{% if 'projectcreate' in request.GET %}
+  <div class="alert mt-3 alert-success alert-dismissible fade show" role="alert">
+    Project created!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+	{% endif %}
+
+
+    <div class="row">
+        <div class="col-12 mt-3">
+            <h1>Encore Projects</h1>
+            <hr>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">ProjectUUID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">location</th>
+                    <th scope="col">costumer Name</th>
+                    <th scope="col">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                      {% for x in projects %}
+                    <tr>
+                          <th scope="row">{{x.projectUUID}}</th>
+                          <td>{{x.name}}</td>
+                          <td>{{x.description}}</td>
+                          <td>{{x.location}}</td>
+                          <td>@{{x.customerName}}</td>
+                          
+                          <td>
+                            <button type="button" class="btn btn-sm " style="background-color: #70A83B ;" data-bs-toggle="modal" data-bs-target="#x{{x.projectUUID}}">
+                              <spans tyle="background-color: #222D32 ;">  
+                                detail
+                              </span>
+                              
+                            </button>
+                            
+
+                          </td>
+                        <!-- Button trigger modal -->
+
+                          <div class="modal fade" id="x{{x.projectUUID}}" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Project Detail</h5>
+                                  <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form>
+                                    <div class="mb-3">
+                                      <label for="projectUUID" class="form-label">Project UUID</label>
+                                      <input type="email" class="form-control" id="projectUUID" readonly  value="{{x.projectUUID}}"aria-describedby="emailHelp">
+                                      
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="Name" class="form-label">Name</label>
+                                      <input type="email" class="form-control" id="Name" readonly  value="{{x.name}}" aria-describedby="emailHelp">
+                                      
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="Description" class="form-label">Description</label>
+                                      <input type="email" class="form-control" id="Description" value="{{x.description}}"  readonly aria-describedby="emailHelp">
+                                      
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="Location" class="form-label">Location</label>
+                                      <input type="email" class="form-control" id="Location" value="{{x.location}}" readonly aria-describedby="emailHelp">
+                                      
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="costumer" class="form-label">Costumer Name</label>
+                                      <input type="email" class="form-control" id="costumer" value="{{x.customerName}}" readonly aria-describedby="emailHelp">
+                                      
+                                    </div>
+
+                                    <a href="{% url 'detail_project' x.projectUUID %}"style="background-color: #70A83B ;" class="btn">Go run script</a>
+                                  </form>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+   
+</div>
+
+
+{% endblock %}

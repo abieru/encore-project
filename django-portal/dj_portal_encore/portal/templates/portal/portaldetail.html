@@ -1,0 +1,75 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Django Portal{% endblock %}
+{% block content %}
+<script type="text/javascript"> 
+  var x = "{{files_url | safe}}";
+  $('#id_IFCjson').val(JSON.stringify(x));
+  
+</script>
+<div class="container">
+  <div class="row">
+      <div class="col-12 mt-3">
+          <h1>{{project.name}}</h1>
+          <hr>
+          <form enctype=multipart/form-data method="post">{% csrf_token %}
+            
+            <div class="mb-3">
+              
+              <label for="id_projectUUID" class="form-label">Project UUID</label>
+              <input type="text" name="projectUUID" class="form-control" id="id_projectUUID" readonly  value="{{project.projectUUID}}"aria-describedby="emailHelp">
+              
+            </div>
+
+            <div class="mb-3">
+              <label for="id_description" class="form-label">Description</label>
+              <input type="text" name="description" class="form-control" id="id_description" value="{{project.description}}"  readonly aria-describedby="textHelp">
+              
+            </div>
+
+
+            {% if ifcdata == 'nodata' %}
+            <h1>Este projecto no tiene un archivo IFC adjunto</h1>
+            <input type="submit" class="btn btn-primary" disabled value="IFC TO JSON">
+
+            {% else %}
+            <div class="mb-3">
+              <label for="id_dateAndTime" class="form-label">Data Time</label>
+              <input type="text" name="dateAndTime" class="form-control" id="id_dateAndTime" value="{{ifcdata.dateAndTimeOfUpload}}" readonly aria-describedby="textHelp">
+              
+            </div>
+            <div class="mb-3">
+              <label for="id_userU" class="form-label">User</label>
+              <input type="text" class="form-control" name="userU" id="id_userU" value="{{ifcdata.userWhoUploadedTheIFCFile}}" readonly aria-describedby="textHelp">
+              
+            </div>
+            <div class="mb-3">
+              <label for="id_uploadedIfcFileUUID" class="form-label">ID IFC</label>
+              <input type="text" name="uploadedIfcFileUUID" class="form-control" id="id_uploadedIfcFileUUID" value="{{ifcdata.uploadedIfcFileUUID}}" readonly aria-describedby="textHelp">
+              
+            </div>
+            <div class="mb-3">
+              <label for="id_name" class="form-label">File Name: <strong>{{ifcdata.filename}}</strong></label>
+              <input class="form-control" type="hidden" name="name" id="id_name" value="{{ifcdata.filename}}">
+              <input class="form-control" type="hidden" name="IFCjson" id="id_IFCjson" value="">
+              
+            </div>
+            
+            <input type="submit" class="btn" style="background-color: #70A83B ;" value="Upload data">
+
+
+            {% endif %}
+              </form>
+             
+
+              
+              
+      </div>
+  </div>
+</div>
+<script type="text/javascript"> 
+  var x = {{files_url | safe}};
+  $('#id_IFCjson').val(JSON.stringify(x));
+  
+</script>
+{% endblock %}
