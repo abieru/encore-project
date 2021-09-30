@@ -8,6 +8,7 @@
     <meta name="author" content="Abieru on github or abielevil on fiverr.com">
     <meta name="generator" content="Hugo 0.88.1">
     {% load static %}
+    {% load staticfiles %}
     <title>{% block title %}{% endblock %}</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
@@ -15,9 +16,9 @@
     
 
     <!-- Bootstrap core CSS -->
-    <link href="" rel="stylesheet">
-    <link href="{% static 'core/css/sidebars.css' %}" rel="stylesheet">
-    <link href="{% static 'core/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    
+    <link href="{% static 'core/css/sidebars.css' %}" type="text/css">
+    <link href="{% static 'core/bootstrap/css/bootstrap.min.css' %}" type="text/css">
 
     <style>
       .bd-placeholder-img {
@@ -69,7 +70,7 @@
               <a class="nav-link" href="{% url 'home' %} ">Home</a>
             </li>
             <li class="nav-item {% if request.path == '/' %} active {% endif %}">
-              <a class="nav-link" href="http://localhost:8000/api/v1.0/projects/">API</a>
+              <a class="nav-link" href="http://django-env.eba-ppvpqxgk.us-west-2.elasticbeanstalk.com//api/v1.0/projects/">API</a>
             </li>
           </ul>
           <ul class="navbar-nav">

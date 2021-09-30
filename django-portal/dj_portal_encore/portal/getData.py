@@ -24,40 +24,49 @@ response_f =response_json['projectMetadataDTOList']
 #print(response_f)
 
 def getifcfile(projectid):
-    try:
-        response_ifcinfo = requests.get(f'https://demo.encorebim.eu/api/projects/{projectid}/ifcs', auth=HTTPBasicAuth('brea', 'nw7H6Bq13pOL')).json()
-        
-        #ifcdata = response_ifcinfo['ifcMetadataDTOList'][0]
-        ifcidofFile =response_ifcinfo['ifcMetadataDTOList'][0]['uploadedIfcFileUUID']
-        
 
-        responsefileifc = requests.get(f'https://demo.encorebim.eu/api/projects/{projectid}/ifcs/{ifcidofFile}', auth=HTTPBasicAuth('brea', 'nw7H6Bq13pOL'))
+    response_ifcinfo = requests.get(f'https://demo.encorebim.eu/api/projects/{projectid}', auth=HTTPBasicAuth('brea', 'nw7H6Bq13pOL')).json()
+    
+    #ifcdata = response_ifcinfo['ifcMetadataDTOList'][0]
+    #ifcidofFile =response_ifcinfo['ifcMetadataDTOList'][0]['uploadedIfcFileUUID']
+    
+    
+    if response_ifcinfo['ifcs']:
+        filename =response_ifcinfo['ifcs']['BEFORE_RENOVATION']['filename']
+        ifcPurpose =response_ifcinfo['ifcs']['BEFORE_RENOVATION']['ifcPurpose']
+
+        responsefileifc = requests.get(f'https://demo.encorebim.eu/api/projects/{projectid}/ifcs/BEFORE_RENOVATION', auth=HTTPBasicAuth('brea', 'nw7H6Bq13pOL'))
         
-        namefile = responsefileifc.headers['Content-Disposition']
+        #namefile = responsefileifc.headers['Content-Disposition']
 
 
         
-        string_clean = re.sub("\;|\=","",namefile)
-        cadenalimpia = string_clean[18:]
+        #string_clean = re.sub("\;|\=","",namefile)
+        #cadenalimpia = string_clean[18:]
         
         
-        file = open(f'{BASE_DIR2}/portal/ifc_files/{cadenalimpia}', "wb") 
+        file = open(f'{BASE_DIR2}/portal/ifc_files/{filename}', "wb") 
         file.write(responsefileifc.content)
-        print(f'nombre del archivo {file.name}')
+        print(f'nombre del archivo {filename}')
         file.close()
         
-        url_of_ifcFILE = f'{BASE_DIR2}/portal/ifc_files/{cadenalimpia}'
+        url_of_ifcFILE = f'{BASE_DIR2}/portal/ifc_files/{filename}'
         #PRUEBA DE ARCHIVO JSON GENEBASE_DIR2RADO
         
-        ifcjsonfunc(cadenalimpia)
+        ifcjsonfunc(filename)
     
-        file = open(f'{BASE_DIR2}/portal/json_results/{cadenalimpia}.json', 'r')
+        file = open(f'{BASE_DIR2}/portal/json_results/{filename}.json', 'r')
 
         data = json.load(file)
-        print(data)
-        return data
-    except:
-        print('este archivo no se puede leer')
+        
+        return data 
+
+
+    else:
+        print('no tiene file ifc')
+    
+    
+
 
 
 

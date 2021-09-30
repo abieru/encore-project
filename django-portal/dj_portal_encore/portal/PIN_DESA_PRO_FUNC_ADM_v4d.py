@@ -1,5 +1,6 @@
-import ifcopenshell
+from . import ifcopenshell
 import numpy as np
+
 import pyproj
 import json
 from pathlib import Path

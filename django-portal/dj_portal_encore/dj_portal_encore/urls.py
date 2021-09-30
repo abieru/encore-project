@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from portal.views import PortalClassView, PortalcreateView
-
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('', include('portal.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
@@ -28,4 +29,4 @@ urlpatterns = [
     path('admin1/', admin.site.urls),
     path('', PortalClassView.as_view(), name="home"),
     path('<slug:slug>/detail/', PortalcreateView.as_view(), name="detail_project"),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

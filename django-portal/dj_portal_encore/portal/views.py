@@ -1,5 +1,4 @@
 from django.views.generic.base import TemplateView  
-from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -23,11 +22,11 @@ class PortalClassView(TemplateView):
         
 
 @method_decorator(login_required, name="dispatch")
-class PortalcreateView(UpdateView):
+class PortalcreateView(CreateView):
     
     
     model = IFCFilejson
-    fields =['projectUUID']
+    fields =['uploadedIfcFileUUID', 'projectUUID', 'description', 'name', 'userU', 'IFCjson', 'dateAndTime']
     template_name = "portal/portaldetail.html" 
 
 

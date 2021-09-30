@@ -1,5 +1,5 @@
 
-import ifcopenshell
+#from portal import ifcopenshell
 import numpy as np
 from .PIN_DESA_PRO_FUNC_ADM_v4d import *
 from pathlib import Path
