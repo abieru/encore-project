@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% load staticfiles %}
+
 {% block title %}Django Portal{% endblock %}
 {% block content %}
 
@@ -25,6 +25,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
                     <th scope="col">location</th>
+                    <th scope="col">File Name</th>
                     <th scope="col">costumer Name</th>
                     <th scope="col">Details</th>
                   </tr>
@@ -36,6 +37,11 @@
                           <td>{{x.name}}</td>
                           <td>{{x.description}}</td>
                           <td>{{x.location}}</td>
+                          {% if x.ifcs %}
+                          <td>{{x.ifcs.BEFORE_RENOVATION.filename}}</td>
+                          {% else %}
+                          <td>This file has no name</td>
+                          {% endif %}
                           <td>@{{x.customerName}}</td>
                           
                           <td>

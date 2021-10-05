@@ -1,4 +1,5 @@
-from . import ifcopenshell
+import ifcopenshellwindows as ifcopenshell #try this import if u work in windows
+from . import ifcopenshell #import for linux
 import numpy as np
 
 import pyproj

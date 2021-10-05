@@ -15,7 +15,7 @@ class PortalClassView(TemplateView):
     template_name = "portal/portal.html" 
 
     def get_context_data(self, **kwargs):
-        data_project = response_f
+        data_project = obtenerdataEngeneral()
         context = super().get_context_data(**kwargs)
         context['projects'] = data_project
         return context

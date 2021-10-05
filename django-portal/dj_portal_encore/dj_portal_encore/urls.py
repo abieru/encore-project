@@ -30,3 +30,6 @@ urlpatterns = [
     path('', PortalClassView.as_view(), name="home"),
     path('<slug:slug>/detail/', PortalcreateView.as_view(), name="detail_project"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

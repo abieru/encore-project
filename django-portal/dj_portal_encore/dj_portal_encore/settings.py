@@ -28,10 +28,10 @@ SECRET_KEY = 'django-insecure-wtqz0yhf9a_aov*(&blxs*z@c=ju&hqaq-d-wz=#$-q(h8@igh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["http://djencoreaws.eba-ty22x2k2.us-west-2.elasticbeanstalk.com/"]
+ALLOWED_HOSTS = ["djangoencore-aws2-dev.us-west-2.elasticbeanstalk.com"]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+#CSRF_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,8 +57,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = 'dj_portal_encore.urls'
 
 TEMPLATES = [
@@ -126,10 +128,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_URL = '/static/'
+STATIC_HOST  = 'http://djangoencore-aws2-dev.us-west-2.elasticbeanstalk.com/'
+STATIC_URL = STATIC_HOST + '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 if DEBUG:
     EMAIL_BACKEND ="django.core.mail.backends.filebased.EmailBackend"

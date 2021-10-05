@@ -1,0 +1,1 @@
+{"timestamp":"2021-10-03T13:55:21.167+00:00","status":400,"error":"Bad Request","message":"Failed to convert value of type 'java.lang.String' to required type 'java.util.UUID'; nested exception is java.lang.IllegalArgumentException: Invalid UUID string: BEFORE_RENOVATION","path":"/api/projects/08d3053f-7688-4448-8d90-960800825c51/ifcs/BEFORE_RENOVATION"}

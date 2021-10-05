@@ -16,11 +16,12 @@ cadena_deletras = string2.split("/")
 len_ofcadena = len(cadena_deletras)-2
 print(cadena_deletras[len_ofcadena])
 """
+def obtenerdataEngeneral():
+    response = requests.get('https://demo.encorebim.eu/api/projects', auth=HTTPBasicAuth('brea', 'nw7H6Bq13pOL'))
 
-response = requests.get('https://demo.encorebim.eu/api/projects', auth=HTTPBasicAuth('brea', 'nw7H6Bq13pOL'))
-
-response_json = response.json()
-response_f =response_json['projectMetadataDTOList']
+    response_json = response.json()
+    response_f =response_json['projectMetadataDTOList']
+    return response_f 
 #print(response_f)
 
 def getifcfile(projectid):
@@ -66,7 +67,7 @@ def getifcfile(projectid):
         print('no tiene file ifc')
     
     
-
+#getifcfile('08d3053f-7688-4448-8d90-960800825c51')
 
 
 

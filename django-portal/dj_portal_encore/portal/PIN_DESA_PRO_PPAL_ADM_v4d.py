@@ -31,6 +31,4 @@ def ifcjsonfunc(filename):
     WallsGeographicCoordinates=FXII_Coordinates_Convert(GeometryAbsWalls,ifc)
     FXIIIb_Json_Export(WallsGeographicCoordinates,DicWalls_Floor, filename)
 
-
-
-
+#ifcjsonfunc('EDEA_ifc2x3CV20_EXISTING.ifc')
