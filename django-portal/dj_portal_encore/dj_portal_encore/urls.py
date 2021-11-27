@@ -1,22 +1,10 @@
-"""dj_portal_encore URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
-from portal.views import PortalClassView, PortalcreateView
+from portal.views import PortalClassView, PortalcreateView, PortalListView, ProjectDelete
 from django.conf import settings
+from rest_framework.authtoken import views
+
 from django.conf.urls.static import static
 urlpatterns = [
     path('', include('portal.urls')),
@@ -28,7 +16,14 @@ urlpatterns = [
 
     path('admin1/', admin.site.urls),
     path('', PortalClassView.as_view(), name="home"),
+
+    #path('projectupload/', IfcConvertModelView.as_view(), name="projectuploadlist"),
+
+    path('apilist/', PortalListView.as_view(), name="listview"),
     path('<slug:slug>/detail/', PortalcreateView.as_view(), name="detail_project"),
+    path('delete/<int:pk>/', ProjectDelete.as_view(), name='deleteP'),
+
+    path('generatetoken/', views.obtain_auth_token),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

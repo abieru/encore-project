@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Django Portal{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-3">
+            <h1>Result List</h1>
+            <hr>
+
+            <ul> 
+                {% for article in object_list %}
+                    <li>
+
+
+
+
+
+
+                          <div class="card mb-3">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{article.name}} 
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="{% url 'deleteP' article.id %}" class="btn btn-sm btn-danger " >Delete Project</a>
+                                        
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    <strong>uploadedIfcFileUUID :</strong> {{article.uploadedIfcFileUUID}} <br/>
+                                    <strong>projectUUID :</strong> {{article.projectUUID}} <br/>
+                                    <strong>description :</strong> {{article.description}} <br/>
+                                    <strong>name :</strong> {{article.name}} <br/>
+                                    <strong>userU :</strong> {{article.userU}} <br/>
+                                    
+                                </p>
+
+                                <div class="card mb-2 mt-2">
+                                    <div class="card-body">
+                                        <h6>IFCjson: </h6>
+                                        <code>
+                                            {{article.IFCjson}}
+                                        </code>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="card-footer text-muted">
+                              {{article.dateAndTime}} 
+                            </div>
+                          </div>
+
+                      
+
+
+
+                    </li>
+                
+            
+                {% endfor %}
+            
+            </ul>
+                
+                
+        </div>
+    </div>
+  </div>
+
+{% endblock %}

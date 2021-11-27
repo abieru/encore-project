@@ -4,7 +4,7 @@
 {% block title %}Django Portal{% endblock %}
 {% block content %}
 <script type="text/javascript"> 
-  var x = "{{files_url | safe}}";
+  var x = {{files_url | safe}};
   $('#id_IFCjson').val(JSON.stringify(x));
   
 </script>

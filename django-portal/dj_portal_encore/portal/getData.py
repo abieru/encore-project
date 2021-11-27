@@ -4,12 +4,12 @@ from requests.auth import HTTPBasicAuth
 from requests.sessions import Request
 from django.urls import resolve, reverse_lazy
 from pathlib import Path
-from .PIN_DESA_PRO_PPAL_ADM_v4d import ifcjsonfunc
+#from .PIN_DESA_PRO_PPAL_ADM_v5a import ifcjsonfunc
+from .PIN_DESA_PRO_PPAL_ADM_v010 import runscript
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR2 = Path(__file__).resolve().parent.parent
 
-string2 = 'http://localhost:8000/748dd2a7-b5ed-4329-9028-28427abffe66/'
 
 """
 cadena_deletras = string2.split("/")
@@ -36,7 +36,7 @@ def getifcfile(projectid):
         filename =response_ifcinfo['ifcs']['BEFORE_RENOVATION']['filename']
         ifcPurpose =response_ifcinfo['ifcs']['BEFORE_RENOVATION']['ifcPurpose']
 
-        responsefileifc = requests.get(f'https://demo.encorebim.eu/api/projects/{projectid}/ifcs/BEFORE_RENOVATION', auth=HTTPBasicAuth('brea', 'nw7H6Bq13pOL'))
+        responsefileifc = requests.get(f'https://demo.encorebim.eu/api/projects/{projectid}/ifcs/by-purpose/BEFORE_RENOVATION', auth=HTTPBasicAuth('brea', 'nw7H6Bq13pOL'))
         
         #namefile = responsefileifc.headers['Content-Disposition']
 
@@ -54,8 +54,10 @@ def getifcfile(projectid):
         url_of_ifcFILE = f'{BASE_DIR2}/portal/ifc_files/{filename}'
         #PRUEBA DE ARCHIVO JSON GENEBASE_DIR2RADO
         
-        ifcjsonfunc(filename)
-    
+        #ifcjsonfunc(filename)
+        runscript(filename)
+
+
         file = open(f'{BASE_DIR2}/portal/json_results/{filename}.json', 'r')
 
         data = json.load(file)
@@ -67,7 +69,7 @@ def getifcfile(projectid):
         print('no tiene file ifc')
     
     
-#getifcfile('08d3053f-7688-4448-8d90-960800825c51')
+#getifcfile('fb922e56-9d27-44c4-9981-269469731146')
 
 
 

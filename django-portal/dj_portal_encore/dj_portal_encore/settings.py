@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-wtqz0yhf9a_aov*(&blxs*z@c=ju&hqaq-d-wz=#$-q(h8@igh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["djangoencore-aws2-dev.us-west-2.elasticbeanstalk.com"]
+ALLOWED_HOSTS = ["djangoencore-aws2-dev.us-west-2.elasticbeanstalk.com"]#"djangoencore-aws2-dev.us-west-2.elasticbeanstalk.com"
 
 #CSRF_COOKIE_SECURE = True
 #SESSION_COOKIE_SECURE = True
@@ -43,11 +43,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'core',
     'portal',
+    'django_filters'
     
     
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES':(
+        'rest_framework.permissions.IsAdminUser', 
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
